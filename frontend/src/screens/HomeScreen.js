@@ -6,7 +6,7 @@ import { listProducts } from "../actions/productActions";
 
 const HomeScreen = () => {
   const dispatch = useDispatch();
-  //BUG
+
   const productList = useSelector((state) => state.productList);
   const { loading, error, products } = productList;
 
