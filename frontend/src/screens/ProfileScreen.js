@@ -30,7 +30,7 @@ const ProfileScreen = (location, history) => {
     if (!userInfo) {
       navigate("/login");
     } else {
-      if (!user.name) {
+      if (!user || !user.name) {
         dispatch(getUserDetails("profile"));
       } else {
         setName(user.name);

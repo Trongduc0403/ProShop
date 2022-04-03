@@ -25,6 +25,7 @@ function ProductScreen() {
 
   const { id } = useParams();
 
+
   useEffect(() => {
     dispatch(listProductDetails(id));
   }, [dispatch, id]);
