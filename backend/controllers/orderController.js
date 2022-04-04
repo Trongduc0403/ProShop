@@ -54,9 +54,9 @@ const getOrderById = asyncHandler(async (req, res) => {
   }
 });
 
-//@desc Update order to paid
-//@route GET /api/orders/:id/pay
-//@access Private
+// @desc    Update order to paid
+// @route   GET /api/orders/:id/pay
+// @access  Private
 const updateOrderToPaid = asyncHandler(async (req, res) => {
   const order = await Order.findById(req.params.id);
 
@@ -70,7 +70,7 @@ const updateOrderToPaid = asyncHandler(async (req, res) => {
       email_address: req.body.payer.email_address,
     };
 
-    const updatedOrder = await order.sare();
+    const updatedOrder = await order.save();
 
     res.json(updatedOrder);
   } else {
@@ -79,4 +79,12 @@ const updateOrderToPaid = asyncHandler(async (req, res) => {
   }
 });
 
-export { addOrderItems, getOrderById, updateOrderToPaid };
+// @desc    Get logged in user orders
+// @route   GET /api/orders/myorders
+// @access  Private
+const getMyOrders = asyncHandler(async (req, res) => {
+  const orders = await Order.find({user: req.user._id});
+    res.json(orders)
+});
+
+export { addOrderItems, getOrderById, updateOrderToPaid, getMyOrders };

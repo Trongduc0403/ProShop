@@ -2,7 +2,8 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { LinkContainer } from "react-router-bootstrap";
 import { Navbar, Nav, Container, NavDropdown } from "react-bootstrap";
-import { USER_LOGOUT } from "../constants/userConstants";
+import { USER_DETAILS_RESET, USER_LOGOUT } from "../constants/userConstants";
+import { ORDER_LIST_MY_RESET } from "../constants/orderConstants";
 
 const Header = () => {
   const dispatch = useDispatch();
@@ -14,6 +15,12 @@ const Header = () => {
     localStorage.removeItem("userInfo");
     dispatch({
       type: USER_LOGOUT,
+    });
+    dispatch({
+      type: USER_DETAILS_RESET,
+    });
+    dispatch({
+      type: ORDER_LIST_MY_RESET,
     });
   };
 
