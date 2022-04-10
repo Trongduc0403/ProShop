@@ -20,11 +20,11 @@ const Products = ({ product }) => {
         <Card.Text as="div">
           <Rating
             value={product.rating}
-            text={`${product.numReviews} reviews`}
+            text={`${product.numReviews} đánh giá`}
           />
         </Card.Text>
 
-        <Card.Text as="h3">${product.price}</Card.Text>
+        <Card.Text as="h3">{product.price.toLocaleString('vi-VN')}đ</Card.Text>
       </Card.Body>
     </Card>
   );

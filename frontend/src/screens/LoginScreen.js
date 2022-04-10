@@ -37,12 +37,12 @@ const LoginScreen = (location, history) => {
 
   return (
     <FormContainer>
-      <h1>Sign In</h1>
+      <h1>Đăng nhập</h1>
       {error && <Message variant="danger">{error}</Message>}
       {loading && <Loader />}
       <Form onSubmit={submitHandler}>
         <Form.Group controlId="email">
-          <Form.Label>Email Address</Form.Label>
+          <Form.Label>Địa chỉ Email</Form.Label>
           <Form.Control
             type="email"
             placeholder="Enter email"
@@ -52,7 +52,7 @@ const LoginScreen = (location, history) => {
         </Form.Group>
 
         <Form.Group controlId="password">
-          <Form.Label>Password Address</Form.Label>
+          <Form.Label>Mật khẩu</Form.Label>
           <Form.Control
             type="password"
             placeholder="Enter password"
@@ -62,7 +62,7 @@ const LoginScreen = (location, history) => {
         </Form.Group>
 
         <Button type="submit" variant="primary">
-          Sign In
+          Đăng nhập
         </Button>
       </Form>
 

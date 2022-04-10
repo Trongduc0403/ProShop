@@ -52,7 +52,7 @@ const ShippingScreen = () => {
         </Form.Group>
 
         <Form.Group controlId="postalCode">
-          <Form.Label>Postal Code</Form.Label>
+          <Form.Label>Mã bưu chính</Form.Label>
           <Form.Control
             type="text"
             placeholder="Postal Code"
@@ -63,7 +63,7 @@ const ShippingScreen = () => {
         </Form.Group>
 
         <Form.Group controlId="country">
-          <Form.Label>Country</Form.Label>
+          <Form.Label>Quốc gia</Form.Label>
           <Form.Control
             type="text"
             placeholder="Coungtry"
@@ -73,7 +73,7 @@ const ShippingScreen = () => {
           ></Form.Control>
         </Form.Group>
         <Button type="submit" variant="primary">
-          Continue
+          Tiếp tục
         </Button>
       </Form>
     </FormContainer>

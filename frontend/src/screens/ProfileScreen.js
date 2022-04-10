@@ -7,6 +7,7 @@ import Message from "../components/Message";
 import Loader from "../components/Loader";
 import { getUserDetails, updateUserProfile } from "../actions/userActions";
 import { listMyOrder } from "../actions/orderActions";
+import { USER_UPDATE_PROFILE_RESET } from "../constants/userConstants";
 
 const ProfileScreen = (location, history) => {
   const [name, setName] = useState("");
@@ -35,7 +36,8 @@ const ProfileScreen = (location, history) => {
     if (!userInfo) {
       navigate("/login");
     } else {
-      if (!user || !user.name) {
+      if (!user || !user.name || success) {
+        dispatch({ type: USER_UPDATE_PROFILE_RESET });
         dispatch(getUserDetails("profile"));
         dispatch(listMyOrder());
       } else {
@@ -43,7 +45,7 @@ const ProfileScreen = (location, history) => {
         setEmail(user.email);
       }
     }
-  }, [dispatch, navigate, userInfo, user]);
+  }, [dispatch, navigate, userInfo, user, success]);
 
   const submitHandler = (e) => {
     e.preventDefault();
@@ -57,7 +59,7 @@ const ProfileScreen = (location, history) => {
   return (
     <Row>
       <Col md={3}>
-        <h2>User profile</h2>
+        <h2>Hồ sơ người dùng</h2>
         {message && <Message variant="danger">{message}</Message>}
         {error && <Message variant="danger">{error}</Message>}
         {success && <Message variant="success">Profile Updated</Message>}
@@ -109,7 +111,7 @@ const ProfileScreen = (location, history) => {
         </Form>
       </Col>
       <Col md={9}>
-        <h2>My Order</h2>
+        <h2>Đơn hàng của tôi</h2>
         {loadingOrders ? (
           <Loader />
         ) : errorOrders ? (
@@ -119,10 +121,10 @@ const ProfileScreen = (location, history) => {
             <thead>
               <tr>
                 <th>ID</th>
-                <th>DATE</th>
-                <th>TOTAL</th>
-                <th>PAID</th>
-                <th>DELIVERED</th>
+                <th>NGÀY</th>
+                <th>SỐ TIỀN</th>
+                <th>ĐÃ THANH TOÁN</th>
+                <th>ĐÃ VẬN CHUYỂN</th>
                 <th></th>
               </tr>
             </thead>
@@ -131,7 +133,7 @@ const ProfileScreen = (location, history) => {
                 <tr key={order._id}>
                   <td>{order._id}</td>
                   <td>{order.createdAt.substring(0, 10)}</td>
-                  <td>{order.totalPrice}</td>
+                  <td>{order.totalPrice.toLocaleString("vi-VN")}đ</td>
                   <td>
                     {order.isPaid ? (
                       order.paidAt.substring(0, 10)
@@ -140,7 +142,7 @@ const ProfileScreen = (location, history) => {
                     )}
                   </td>
                   <td>
-                    {order.idDelivered ? (
+                    {order.isDelivered ? (
                       order.deliveredAt.substring(0, 10)
                     ) : (
                       <i className="fas fa-times" style={{ color: "red" }}></i>
@@ -149,7 +151,7 @@ const ProfileScreen = (location, history) => {
                   <td>
                     <LinkContainer to={`/order/${order._id}`}>
                       <Button className="btn-sm" variant="light">
-                        Details
+                        Chi tiết
                       </Button>
                     </LinkContainer>
                   </td>
