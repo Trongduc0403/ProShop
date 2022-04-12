@@ -37,6 +37,8 @@ const OrderScreen = () => {
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
 
+  const cart = useSelector((state) => state.cart);
+
   const addDecimals = (num) => {
     return (Math.round(num * 100) / 100).toFixed(2);
   };
@@ -130,7 +132,9 @@ const OrderScreen = () => {
                 {order.paymentMethod}
               </p>
               {order.isPaid ? (
-                <Message variant="success">Đã thanh toán vào lúc {order.paidAt}</Message>
+                <Message variant="success">
+                  Đã thanh toán vào lúc {order.paidAt}
+                </Message>
               ) : (
                 <Message variant="danger">Chưa thanh toán</Message>
               )}
@@ -206,7 +210,7 @@ const OrderScreen = () => {
                     <Loader />
                   ) : (
                     <PayPalButton
-                      amount={order.totalPrice.toLocaleString("vi-VN")}
+                      amount={((order.totalPrice)/22800).toFixed(2)}
                       onSuccess={successPaymentHandler}
                     />
                   )}
